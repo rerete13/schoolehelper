@@ -2,7 +2,7 @@ from detection import get_text
 import re
 import string
 
-x = get_text('2.png')
+x = get_text('3.png')
 
 
 letters = list(string.ascii_uppercase)
