@@ -2,12 +2,12 @@ from detection import get_text
 import re
 import string
 
-x = get_text('3.png')
 
 
-letters = list(string.ascii_uppercase)
+
 
 def formatting(text:str):
+    letters = list(string.ascii_uppercase)
     text = text.splitlines()
     data = []
     for i in text:
@@ -27,4 +27,4 @@ def formatting(text:str):
     return res
 
 
-print(formatting(x))
+# print(formatting(x))

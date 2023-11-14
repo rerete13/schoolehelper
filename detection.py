@@ -11,6 +11,8 @@ def detect_text(img:str):
     return resualt
 
 
+# print(detect_text('2.png'))
+
 
 def get_text(img:str):
     x = detect_text(img)
@@ -21,4 +23,5 @@ def get_text(img:str):
     return y
         
     
+# print(get_text('2.png'))
 

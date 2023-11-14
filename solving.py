@@ -1,9 +1,10 @@
 import g4f as gf
 
 
-def gpt(message:str, gpt_model):
+def gpt(message:str, gpt_model, provider):
     response = gf.ChatCompletion.create(
         model=gpt_model,
+        provider=provider,
         messages=[{"role": "user", "content": message}]
     )
     print(response)
@@ -11,4 +12,3 @@ def gpt(message:str, gpt_model):
 
 
 
-gpt('hi', gpt_model=gf.models.gpt_4)
