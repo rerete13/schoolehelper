@@ -1,0 +1,21 @@
+{
+    "id": 777777777,
+    "first-name": "xxxx",
+    "last-name": null,
+    "user-name": "yyyy",
+    "languige": "en",
+    "info": {
+        "findings-count": 0,
+        "bot-start": "15-11-2023 15:30:53"
+    },
+    "subscribe": {
+        "count": 0,
+        "sub-date": 0,
+        "status": false
+    },
+    "premium": {
+        "count-vip": 0
+    },
+    "photo-path": [],
+    "chat-history": []
+}
