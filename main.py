@@ -7,9 +7,10 @@ from sorting import formatting
 from solving import gpt
 import g4f as gf
 import json
-from data_func import create_user_data
+from data_func import create_user_data, add_user_data
 from pprint import pprint as pp
-
+from bot_func import wikamp_task_comliter, download_photo_by_file_id
+import datetime
 
 bot = telebot.TeleBot(tg_token)
 
@@ -23,12 +24,21 @@ def start(message):
     
     bot.send_message(message.chat.id, message.from_user.language_code)
 
+    # with open(f"user-data/{message.chat.id}.json", "r") as f:
+    #     data = json.load(f)
+        
+    # bot.send_photo(message.chat.id, data['photo-path'][-1][1])
+
 
 
 @bot.message_handler(content_types=['photo'])
 def process_photo_task(message):
-    mti = message.chat.id
+
+    file_id = message.photo[-1].file_id
     
+    add_user_data(f'user-data/{message.chat.id}', 'photo-path', file_id, data_update_path_in=None)
+    
+
 
     btns = types.InlineKeyboardMarkup(row_width=1)
     btn1 = types.InlineKeyboardButton(text='with abc', callback_data='with')
@@ -37,6 +47,9 @@ def process_photo_task(message):
     btns.add(btn1, btn2)
 
     bot.send_message(message.chat.id, 'choose your type', reply_markup=btns)
+    
+    
+    
     
     # bot.send_message(mti, 'your task processing...')
     
@@ -62,8 +75,17 @@ def process_photo_task(message):
 @bot.callback_query_handler(func=lambda call: True)
 def checck_callback(call):
     try:
-        # pp(call)
-        bot.send_message(call.message.chat.id, call.message)
+        
+        if call.data == 'with':
+            bot.delete_message(call.message.chat.id, call.message.id)
+            bot.send_message(call.message.chat.id, 'wait untill bot process your task...')
+            
+            with open(f"user-data/{call.message.chat.id}.json", "r") as f:
+                data = json.load(f)
+
+            download_photo_by_file_id(bot, call.message, data['photo-path'][-1][1], 'photos', name=None)
+            
+            
 
     except:
         pass
